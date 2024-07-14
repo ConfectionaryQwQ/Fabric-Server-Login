@@ -64,7 +64,7 @@ public class LoginGuard implements ModInitializer {
         if (!FileUtil.fileExists("password"+ File.separator + playerName + ".txt")) {
             FileUtil.writeToFile("password"+ File.separator + playerName + ".txt", "");
         }
-        player.sendMessage(Text.translatable("FreezeMessage"));
+        player.sendMessage(Text.translatable("请使用/register <密码> <密码>来注册,/login <密码> <密码>来登陆"));
         // Load and teleport to the saved position
         double[] position = FileUtil.loadPlayerPosition(positionFileName);
         if (position != null) {
@@ -122,11 +122,11 @@ public class LoginGuard implements ModInitializer {
                                         if (registered) {
                                             // Player can move
                                             releasePlayer(player);
-                                            player.sendMessage(Text.translatable("RegisterDone"));
+                                            player.sendMessage(Text.translatable("注册完成"));
                                         }
                                     } else {
-                                        player.sendMessage(Text.translatable("difPassword"));
-                                        player.sendMessage(Text.translatable("TryAgain"));
+                                        player.sendMessage(Text.translatable("不同的密码"));
+                                        player.sendMessage(Text.translatable("请重试"));
                                     }
                                     return 1;
                                 })
@@ -147,12 +147,12 @@ public class LoginGuard implements ModInitializer {
                             if (LoginCode == 1) {
                                 // Player can move
                                 releasePlayer(player);
-                                player.sendMessage(Text.translatable("LoginDone"));
+                                player.sendMessage(Text.translatable("登陆完成"));
                             } else if (LoginCode == 0) {
-                                player.sendMessage(Text.translatable("WrongPassword"));
-                                player.sendMessage(Text.translatable("TryAgain"));
+                                player.sendMessage(Text.translatable("密码错误"));
+                                player.sendMessage(Text.translatable("请重试"));
                             } else if (LoginCode == 2) {
-                                player.sendMessage(Text.translatable("NotRegister"));
+                                player.sendMessage(Text.translatable("未注册"));
                             }
                             return 1;
                         })
